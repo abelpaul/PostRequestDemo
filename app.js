@@ -6,18 +6,21 @@ var app = express();
 
 app.set("view engine", "ejs");
 
+let friends = ["Glen", "Chris", "Josh", "Christian", "Sean","Vijay"," Anish", "Karan","Tobenna","Mathews"];
+
 app.get("/",function(req,res){
 res.render("home");
 })
 
 app.get("/friends", function(req,res) {
-    let friends = ["Glen", "Chris", "Josh", "Christian", "Sean","Vijay"," Anish", "Karan","Tobenna","Mathews"];
     res.render("friends", {friends: friends});
 })
 
 app.post("/addfriend", function(req, res){
-    console.log(req.body)
-    res.send("Hi Abel It works")
+    var newFriend = req.body.newfriend;
+    friends.push(newFriend);
+    console.log(req.body);
+    res.redirect("/friends");
 });
 
 app.listen(3000, function() {
